@@ -1,26 +1,28 @@
 package io.jeffchang.review.adapter
 
+import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import io.jeffchang.review.data.model.Result
+import io.jeffchang.challenge.R
 import io.jeffchang.review.data.model.Review
-import io.jeffchang.review.widget.ReviewItem
+import kotlinx.android.extensions.LayoutContainer
+import kotlinx.android.synthetic.main.review_item.view.*
 
-class ReviewRecyclerViewAdapter: ListAdapter<
+class ReviewRecyclerViewAdapter : ListAdapter<
         Review,
         ReviewRecyclerViewAdapter.ReviewViewHolder>(ReviewCallback()) {
 
-    private var onReviewClickedListener: OnReviewClickedListener? = null
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ReviewViewHolder {
-        val viewHolder = ReviewViewHolder(ReviewItem(parent.context))
-        viewHolder.itemView.setOnClickListener {
-            val review = getItem(viewHolder.adapterPosition)
-        }
-        return viewHolder
+        val view = LayoutInflater
+                .from(parent.context)
+                .inflate(
+                        R.layout.review_item,
+                        parent,
+                        false)
+        return ReviewViewHolder(view)
     }
 
     override fun onBindViewHolder(holder: ReviewViewHolder, position: Int) {
@@ -28,16 +30,19 @@ class ReviewRecyclerViewAdapter: ListAdapter<
         holder.bind(pullRequest)
     }
 
-    inner class ReviewViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    inner class ReviewViewHolder(itemView: View) :
+            RecyclerView.ViewHolder(itemView), LayoutContainer {
+
+        override val containerView: View? get() = itemView
 
         fun bind(review: Review) {
-            (itemView as ReviewItem).apply {
+            itemView.review_item_title_text_view.text = review.displayTitle
+            itemView.review_item_date_text_view.text = review.dateUpdated
 
-            }
         }
     }
 
-    internal class ReviewCallback: DiffUtil.ItemCallback<Review>() {
+    internal class ReviewCallback : DiffUtil.ItemCallback<Review>() {
 
         override fun areItemsTheSame(oldItem: Review, newItem: Review) =
                 oldItem == newItem
@@ -45,11 +50,4 @@ class ReviewRecyclerViewAdapter: ListAdapter<
         override fun areContentsTheSame(oldItem: Review, newItem: Review) =
                 oldItem == newItem
     }
-
-    interface OnReviewClickedListener {
-
-        fun onReviewClicked(result: Result)
-
-    }
-
 }
