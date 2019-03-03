@@ -20,7 +20,7 @@ class ChallengeApplication: DaggerApplication(), HasActivityInjector {
 
         val appComponent = DaggerAppComponent.builder()
                 .application(this)
-                .networkModule(NetworkModule(Constants.GITHUB_API_URL))
+                .networkModule(NetworkModule(Constants.NEW_YORK_TIMES_REVIEWS_API_URL))
                 .build()
         appComponent.inject(this)
         return appComponent
