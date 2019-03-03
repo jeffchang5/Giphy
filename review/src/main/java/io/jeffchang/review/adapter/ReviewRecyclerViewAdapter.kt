@@ -46,6 +46,7 @@ class ReviewRecyclerViewAdapter : ListAdapter<
                         .into(match_card_profile_image_view)
                 review_item_movie_title_textview.text = review.displayTitle
                 review_item_byline_textview.text = review.byline
+                review_item_desc_textview.text = review.summaryShort
             }
 
         }
