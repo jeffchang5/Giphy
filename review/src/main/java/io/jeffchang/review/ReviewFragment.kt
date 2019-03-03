@@ -8,7 +8,7 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import dagger.android.support.DaggerFragment
-import io.jeffchang.base.common.LineItemDecoration
+import io.jeffchang.base.common.GridItemDecoration
 import io.jeffchang.challenge.R
 import io.jeffchang.review.adapter.ReviewRecyclerViewAdapter
 import io.jeffchang.review.viewmodel.ReviewViewModel
@@ -43,11 +43,11 @@ class ReviewFragment: DaggerFragment() {
             layoutManager = LinearLayoutManager(context)
 
             // If the device has at least a screen width of 600 dp, show 3 instead of 2.
-            
+
             val numberOfColumns = if (resources.getBoolean(R.bool.isTablet)) 3 else 2
             layoutManager = GridLayoutManager(context, numberOfColumns)
 
-            addItemDecoration(LineItemDecoration(context))
+            addItemDecoration(GridItemDecoration(8))
 
             adapter = reviewRecyclerViewAdapter
         }
