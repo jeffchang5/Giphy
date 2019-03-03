@@ -36,7 +36,13 @@ class ReviewViewModel @Inject constructor(
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({
-
+                    Timber.d("There are %s reviews.", it.size)
+                    if (it.isEmpty()) {
+                        _textDataLiveData.value = TextData(R.string.reviews_empty)
+                    } else {
+                        _textDataLiveData.value = null
+                        _reviewLiveData.value = it
+                    }
                 }, { throwable ->
                     Timber.e(throwable)
                     (throwable as? HttpException)?.let {
