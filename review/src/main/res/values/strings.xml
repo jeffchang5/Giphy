@@ -1,0 +1,5 @@
+<resources>
+    <string name="loading">Loading…</string>
+    <string name="reviews_empty">No reviews…</string>
+    <string name="network_error">Network error</string>
+</resources>
