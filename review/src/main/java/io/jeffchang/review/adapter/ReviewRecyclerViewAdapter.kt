@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.squareup.picasso.Picasso
 import io.jeffchang.challenge.R
 import io.jeffchang.review.data.model.Review
 import kotlinx.android.extensions.LayoutContainer
@@ -36,8 +37,16 @@ class ReviewRecyclerViewAdapter : ListAdapter<
         override val containerView: View? get() = itemView
 
         fun bind(review: Review) {
-            itemView.review_item_title_text_view.text = review.displayTitle
-            itemView.review_item_date_text_view.text = review.dateUpdated
+
+
+            itemView.apply {
+                Picasso
+                        .get()
+                        .load(review.multimedia.src)
+                        .into(match_card_profile_image_view)
+                review_item_movie_title_textview.text = review.displayTitle
+                review_item_byline_textview.text = review.byline
+            }
 
         }
     }
