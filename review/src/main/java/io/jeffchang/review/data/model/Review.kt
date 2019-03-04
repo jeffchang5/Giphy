@@ -14,7 +14,7 @@ data class Review(
 	val link: Link,
 
 	@Json(name="publication_date")
-	val publicationDate: String? = null,
+	val publicationDate: String,
 
 	@Json(name="summary_short")
 	val summaryShort: String? = null,
@@ -26,12 +26,12 @@ data class Review(
 	val byline: String? = null,
 
 	@Json(name="headline")
-	val headline: String? = null,
+	val headline: String,
 
 	val multimedia: Multimedia,
 
 	@Json(name="mpaa_rating")
-	val mpaaRating: String? = null,
+	val mpaaRating: String,
 
 	@Json(name="opening_date")
 	val openingDate: String? = null
