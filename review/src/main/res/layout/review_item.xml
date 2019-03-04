@@ -93,6 +93,7 @@
             app:layout_constraintTop_toBottomOf="@+id/review_item_date_textview"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
             tools:text="Movie description" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
