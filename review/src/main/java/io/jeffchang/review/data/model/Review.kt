@@ -10,7 +10,8 @@ data class Review(
 
 	@Json(name="display_title")
 	val displayTitle: String? = null,
-	val link: Link? = null,
+
+	val link: Link,
 
 	@Json(name="publication_date")
 	val publicationDate: String? = null,

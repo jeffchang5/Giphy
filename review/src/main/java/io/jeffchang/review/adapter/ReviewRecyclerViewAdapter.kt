@@ -12,7 +12,9 @@ import io.jeffchang.review.data.model.Review
 import kotlinx.android.extensions.LayoutContainer
 import kotlinx.android.synthetic.main.review_item.view.*
 
-class ReviewRecyclerViewAdapter : ListAdapter<
+class ReviewRecyclerViewAdapter(
+        private val onReviewClickedListener: ((url: String) -> Unit)
+) : ListAdapter<
         Review,
         ReviewRecyclerViewAdapter.ReviewViewHolder>(ReviewCallback()) {
 
@@ -23,7 +25,13 @@ class ReviewRecyclerViewAdapter : ListAdapter<
                         R.layout.review_item,
                         parent,
                         false)
-        return ReviewViewHolder(view)
+
+        val reviewViewHolder = ReviewViewHolder(view)
+        reviewViewHolder.itemView.setOnClickListener {
+            val url = getItem(reviewViewHolder.adapterPosition).link.url
+            onReviewClickedListener.invoke(url)
+        }
+        return reviewViewHolder
     }
 
     override fun onBindViewHolder(holder: ReviewViewHolder, position: Int) {
@@ -59,5 +67,11 @@ class ReviewRecyclerViewAdapter : ListAdapter<
 
         override fun areContentsTheSame(oldItem: Review, newItem: Review) =
                 oldItem == newItem
+    }
+
+    interface OnReviewClickedListener {
+
+        fun onReviewClicked(articleUrl: String)
+
     }
 }

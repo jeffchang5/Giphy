@@ -11,5 +11,5 @@ data class Link(
 	val type: String? = null,
 
 	@Json(name="url")
-	val url: String? = null
+	val url: String
 )

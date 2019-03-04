@@ -9,11 +9,14 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import dagger.android.support.DaggerFragment
 import io.jeffchang.base.common.GridItemDecoration
-import io.jeffchang.challenge.R
 import io.jeffchang.review.adapter.ReviewRecyclerViewAdapter
 import io.jeffchang.review.viewmodel.ReviewViewModel
 import kotlinx.android.synthetic.main.fragment_review.*
 import javax.inject.Inject
+import android.content.Intent
+import android.net.Uri
+import io.jeffchang.challenge.R
+
 
 class ReviewFragment: DaggerFragment() {
 
@@ -21,7 +24,9 @@ class ReviewFragment: DaggerFragment() {
     lateinit var reviewViewModel: ReviewViewModel
 
     private val reviewRecyclerViewAdapter by lazy {
-        ReviewRecyclerViewAdapter()
+        ReviewRecyclerViewAdapter {
+            startNewYorkTimesArticle(it)
+        }
     }
 
     override fun onCreateView(
@@ -62,4 +67,11 @@ class ReviewFragment: DaggerFragment() {
             reviewRecyclerViewAdapter.submitList(it)
         })
     }
+
+    // Directs to either the browser or New York Times app to read the article.
+    private fun startNewYorkTimesArticle(articleUrl: String) {
+        val intent = Intent(Intent.ACTION_VIEW, Uri.parse(articleUrl))
+        startActivity(intent)
+    }
+
 }
