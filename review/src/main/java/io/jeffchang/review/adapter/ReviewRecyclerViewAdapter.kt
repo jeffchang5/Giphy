@@ -54,6 +54,9 @@ class ReviewRecyclerViewAdapter(
                         .into(review_item_profile_image_view)
                 review_item_movie_title_textview.text = review.displayTitle
                 review_item_byline_textview.text = review.byline
+                review_item_mpaa_textview.text = review.mpaaRating
+                review_item_headline_textview.text = review.headline
+                review_item_date_textview.text = review.publicationDate
                 review_item_desc_textview.text = review.summaryShort
             }
 
