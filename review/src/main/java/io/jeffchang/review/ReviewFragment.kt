@@ -5,9 +5,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import dagger.android.support.DaggerFragment
-import io.jeffchang.base.common.LineItemDecoration
+import io.jeffchang.base.common.GridItemDecoration
 import io.jeffchang.challenge.R
 import io.jeffchang.review.adapter.ReviewRecyclerViewAdapter
 import io.jeffchang.review.viewmodel.ReviewViewModel
@@ -38,9 +39,19 @@ class ReviewFragment: DaggerFragment() {
     }
 
     private fun initRecyclerView() {
-        fragment_pull_request_recyclerview.layoutManager = LinearLayoutManager(context)
-        fragment_pull_request_recyclerview.addItemDecoration(LineItemDecoration(context))
-        fragment_pull_request_recyclerview.adapter = reviewRecyclerViewAdapter
+        fragment_pull_request_recyclerview.apply {
+            layoutManager = LinearLayoutManager(context)
+
+            // If the device has at least a screen width of 600 dp, show 3 instead of 2.
+
+            val numberOfColumns = if (resources.getBoolean(R.bool.isTablet)) 3 else 2
+            layoutManager = GridLayoutManager(context, numberOfColumns)
+
+            addItemDecoration(GridItemDecoration(8))
+
+            adapter = reviewRecyclerViewAdapter
+        }
+
     }
 
     private fun subscribeUi() {

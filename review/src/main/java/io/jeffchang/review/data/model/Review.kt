@@ -27,6 +27,8 @@ data class Review(
 	@Json(name="headline")
 	val headline: String? = null,
 
+	val multimedia: Multimedia,
+
 	@Json(name="mpaa_rating")
 	val mpaaRating: String? = null,
 

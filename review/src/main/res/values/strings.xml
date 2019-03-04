@@ -2,4 +2,7 @@
     <string name="loading">Loading…</string>
     <string name="reviews_empty">No reviews…</string>
     <string name="network_error">Network error</string>
+
+    <!--Accessibility-->
+    <string name="movie_desc">Movie</string>
 </resources>
