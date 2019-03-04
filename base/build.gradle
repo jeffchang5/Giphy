@@ -43,6 +43,7 @@ dependencies {
 
     // View
     api "com.squareup.picasso:picasso:$rootProject.picasso_version"
+    api 'androidx.cardview:cardview:1.0.0'
     implementation 'com.airbnb.android:epoxy:3.2.0'
     // Add the annotation processor if you are using Epoxy's annotations (recommended)
     kapt 'com.airbnb.android:epoxy-processor:3.2.0'
